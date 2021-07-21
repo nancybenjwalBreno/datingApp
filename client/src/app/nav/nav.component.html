@@ -1,35 +1,35 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
     <div class="container">
-        <a class="navbar-brand" [routerLink]="'.'">Dating App</a>
+        <a class="navbar-brand" [routerLink]="'/'">Dating App</a>
         <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">&#9776;
         </button>
         <div id="collapseBasic" [collapse]="isCollapsed" class="collapse navbar-collapse">
-            <ul class="navbar-nav" *ngIf="loggenIn">
-                <li class="nav-item active">
-                    <!-- Step 4: Close the menu when a link is clicked. -->
-                    <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Matches</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Lists</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Messages</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true"
-                        (click)="logout()">Logout</a>
-                </li>
+            <ul class="navbar-nav">
+                <ng-container *ngIf="loggenIn">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="'/members'" routerLinkActive="active"
+                            (click)="isMenuCollapsed = true">Matches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="'/lists'" routerLinkActive="active"
+                            (click)="isMenuCollapsed = true">Lists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="'/messages'" routerLinkActive="active"
+                            (click)="isMenuCollapsed = true">Messages</a>
+                    </li>
+                </ng-container>
             </ul>
-            <div class="dropdown ml-auto" *ngIf="loggenIn" dropdown>
-                <a class="dropdown-toggle text-light" dropdownToggle >Welcome user</a>
+            <div class="dropdown ml-auto" *ngIf="loggenIn && (accountService.currentUser$|async) as user" dropdown>
+                <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username|titlecase}}</a>
                 <div class="dropdown-menu mt-3" *dropdownMenu>
                     <a class="dropdown-item">Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" (click)="logout()">Logout</a>
                 </div>
             </div>
-            <form *ngIf="!loggenIn" #loginForm="ngForm" class="form-inline mt-2 mt-md-0 ml-auto" (ngSubmit)="login()"
+            <form style="display: flex; float: right;" *ngIf="!loggenIn" #loginForm="ngForm" class="form-inline mt-2 mt-md-0 ml-auto" (ngSubmit)="login()"
                 autocomplete="off">
                 <input type="text" name="username" [(ngModel)]="model.Username" class="form-control mr-sm-2"
                     placeholder="Username" />
