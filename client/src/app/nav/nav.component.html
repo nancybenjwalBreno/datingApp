@@ -20,6 +20,10 @@
                             (click)="isMenuCollapsed = true">Messages</a>
                     </li>
                 </ng-container>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="'/errors'" routerLinkActive="active"
+                        (click)="isMenuCollapsed = true">Error</a>
+                </li>
             </ul>
             <div class="dropdown ml-auto" *ngIf="loggenIn && (accountService.currentUser$|async) as user" dropdown>
                 <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username|titlecase}}</a>
