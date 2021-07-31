@@ -6,6 +6,7 @@ using DatingApp.Extensions;
 
 namespace API.Entities
 {
+    
     [Table("AppUser")]
     public class AppUser
     {
