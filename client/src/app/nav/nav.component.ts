@@ -13,7 +13,7 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
   model: any = {}
   loggenIn: any;
-  currentUser= new Observable<User>();
+  currentUser = new Observable<User>();
   public isMenuCollapsed = true;
   isCollapsed = true;
   constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
@@ -22,7 +22,9 @@ export class NavComponent implements OnInit {
     this.currentUser = this.accountService.currentUser$;
   }
   login() {
+    alert("Nancy")
     this.accountService.login(this.model).subscribe(response => {
+      console.log(response);
       this.loggenIn = true;
       this.router.navigateByUrl('/members')
     })
