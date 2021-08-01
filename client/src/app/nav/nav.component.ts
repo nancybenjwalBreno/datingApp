@@ -22,7 +22,6 @@ export class NavComponent implements OnInit {
     this.currentUser = this.accountService.currentUser$;
   }
   login() {
-    alert("Nancy")
     this.accountService.login(this.model).subscribe(response => {
       console.log(response);
       this.loggenIn = true;
